@@ -49,6 +49,7 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -95,9 +96,16 @@
       #  thunderbird
     ];
   };
+
   security.sudo.wheelNeedsPassword = true;
   security.apparmor.enable = true;
   security.audit.enable = true;
+  security.sudo = {
+    enable = true;
+    extraConfig = ''
+      %wheel ALL=(ALL) NOPASSWD: ALL
+    '';
+  };
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;
@@ -109,6 +117,8 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+
+  programs.hyprland.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -262,6 +272,38 @@
         "ssh"
         "terraform"
       ];
+    };
+  };
+
+  # Docker
+  virtualisation.docker = {
+    enable = true;
+    daemon.settings.features.cdi = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = false;
+      daemon.settings = {
+        features.cdi = true;
+        cdi-spec-dirs = [ "/home/christan/.cdi" ];
+      };
+    };
+  };
+
+  hardware = {
+    graphics = {
+      enable = true;
+    };
+    nvidia-container-toolkit = {
+      enable = true;
+      mount-nvidia-executables = false;
+    };
+    nvidia = {
+      open = true;
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
   };
 
