@@ -26,3 +26,6 @@ cleanup:
 upgrade:
 	@echo 'Upgrade to new NixOs configuration'
 	@nixos-rebuild switch --upgrade
+
+format:
+	@nixfmt configuration.nix
