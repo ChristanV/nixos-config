@@ -209,6 +209,10 @@
     fzf
     plantuml
     graphviz
+    kitty
+
+    # Hyperland
+    xdg-desktop-portal-hyprland
   ];
   environment.variables.EDITOR = "nvim";
   environment.etc."zshrc".text = ''
