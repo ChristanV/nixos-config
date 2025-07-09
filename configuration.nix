@@ -1,5 +1,16 @@
 { config, pkgs, ... }:
 
+let
+  # unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+  username = "christan";
+  hostname = "nixos";
+
+  azure-cli = pkgs.azure-cli.withExtensions [
+    pkgs.azure-cli-extensions.bastion
+    pkgs.azure-cli-extensions.ssh
+  ];
+
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -14,7 +25,7 @@
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "nixos";
+  networking.hostName = hostname;
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
 
@@ -69,9 +80,9 @@
     # jack.enable = true;
   };
 
-  users.users.christan = {
+  users.users."${username}" = {
     isNormalUser = true;
-    description = "christan";
+    description = "${username}";
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -142,6 +153,13 @@
     };
   };
 
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+  };
+
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
@@ -197,7 +215,7 @@
       setSocketVariable = false;
       daemon.settings = {
         features.cdi = true;
-        cdi-spec-dirs = [ "/home/christan/.cdi" ];
+        cdi-spec-dirs = [ "/home/${username}/.cdi" ];
       };
     };
   };
@@ -224,6 +242,11 @@
     # Desktop apps
     brave
     chromium
+    steam-run
+    nordpass
+    bruno
+    dbeaver-bin
+    vscode
 
     # Core Packages
     neovim
@@ -246,7 +269,6 @@
     lazygit
     fd
     ripgrep
-    chromium
     flyctl
     sops
     gnupg
