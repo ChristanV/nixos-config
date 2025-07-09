@@ -47,8 +47,14 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+
+  # Enable KDE plasma
+  # services.displayManager.sddm.enable = true;
+  # services.desktopManager.plasma6.enable = true;
+
+  programs.sway.enable = false;
   services.xserver.videoDrivers = [ "nvidia" ];
 
   # Configure keymap in X11
@@ -69,7 +75,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    # jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -92,9 +98,8 @@
       "input"
     ];
     shell = pkgs.zsh;
-    packages = with pkgs; [
-      #  thunderbird
-    ];
+    # packages = with pkgs; [
+    # ];
   };
 
   security.sudo.wheelNeedsPassword = true;
@@ -118,7 +123,15 @@
   # Install firefox.
   programs.firefox.enable = true;
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -130,6 +143,7 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
     brave
+    chromium
     vim
     # Core Packages
     neovim
@@ -209,11 +223,22 @@
     fzf
     plantuml
     graphviz
-    kitty
 
-    # Hyperland
-    xdg-desktop-portal-hyprland
+    # hyprland
+    waybar
+    (pkgs.waybar.overrideAttrs (oldAttrs: {
+      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+    }))
+    dunst
+    libnotify
+    kitty
+    swww
+    #alacritty
+    rofi-wayland
+    networkmanagerapplet
+    wofi
   ];
+
   environment.variables.EDITOR = "nvim";
   environment.etc."zshrc".text = ''
     eval "$(starship init zsh)"
@@ -278,6 +303,9 @@
       ];
     };
   };
+
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   # Docker
   virtualisation.docker = {
