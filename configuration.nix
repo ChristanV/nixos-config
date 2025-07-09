@@ -4,6 +4,7 @@ let
   # unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
   username = "christan";
   hostname = "nixos";
+  grub-device = "/dev/nvme0n1";
 
   azure-cli = pkgs.azure-cli.withExtensions [
     pkgs.azure-cli-extensions.bastion
@@ -22,7 +23,7 @@ in
   nixpkgs.config.allowUnsupportedSystem = false;
 
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/nvme0n1";
+  boot.loader.grub.device = grub-device;
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = hostname;
@@ -94,6 +95,7 @@ in
     shell = pkgs.zsh;
   };
 
+  # Security
   security.sudo.wheelNeedsPassword = true;
   security.apparmor.enable = true;
   security.audit.enable = true;
@@ -102,6 +104,10 @@ in
     extraConfig = ''
       %wheel ALL=(ALL) NOPASSWD: ALL
     '';
+  };
+  services.clamav = {
+    daemon.enable = true;
+    updater.enable = true;
   };
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
@@ -116,6 +122,7 @@ in
     xwayland.enable = true;
   };
 
+  # Hyprland themes workaround
   programs.dconf.profiles.user.databases = [
     {
       settings."org/gnome/desktop/interface" = {
@@ -127,6 +134,7 @@ in
       };
     }
   ];
+
   programs.zsh = {
     enable = true;
     autosuggestions.enable = true;
@@ -247,6 +255,7 @@ in
     bruno
     dbeaver-bin
     vscode
+    clamav
 
     # Core Packages
     neovim
@@ -337,5 +346,9 @@ in
     rofi-wayland
     networkmanagerapplet
     wofi
+
+    # Gaming
+    wineWowPackages.stable
+    winetricks
   ];
 }
