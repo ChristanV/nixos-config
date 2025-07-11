@@ -28,7 +28,9 @@ in
 
   networking.hostName = hostname;
   networking.networkmanager.enable = true;
-  networking.firewall.enable = true;
+
+  # https://nixos.wiki/wiki/Firewall
+  networking.firewall.enable = true; # This will make all local ports and services unreachable from external connections.
 
   time.timeZone = "Africa/Johannesburg";
   i18n.defaultLocale = "en_GB.UTF-8";
@@ -255,6 +257,8 @@ in
     bruno
     dbeaver-bin
     vscode
+
+    # Security
     clamav
 
     # Core Packages
