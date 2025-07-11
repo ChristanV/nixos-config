@@ -334,6 +334,7 @@ in
     minikube
     jdk23
     nixfmt-rfc-style
+    gitleaks
 
     # Terminals
     wezterm
