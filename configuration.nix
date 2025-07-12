@@ -121,6 +121,7 @@ in
 
   programs.hyprland = {
     enable = true;
+    withUWSM = false;
     xwayland.enable = true;
   };
 
@@ -170,11 +171,6 @@ in
     localNetworkGameTransfers.openFirewall = true;
   };
 
-  environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
-    NIXOS_OZONE_WL = "1";
-  };
-
   environment.variables.EDITOR = "nvim";
   environment.etc."zshrc".text = ''
     eval "$(starship init zsh)"
@@ -214,15 +210,26 @@ in
     EOF
   '';
 
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  # Hyprland
+  # https://wiki.nixos.org/wiki/Hyprland
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+    ];
+  };
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+  };
 
   virtualisation.docker = {
     enable = true;
     daemon.settings.features.cdi = true;
     rootless = {
       enable = true;
-      setSocketVariable = false;
+      setSocketVariable = true;
       daemon.settings = {
         features.cdi = true;
         cdi-spec-dirs = [ "/home/${username}/.cdi" ];
@@ -257,7 +264,7 @@ in
     bruno
     dbeaver-bin
     vscode
-    libsForQt5.dolphin # Filemanager
+    nemo # Filemanager
 
     # Security
     clamav
@@ -350,10 +357,12 @@ in
     }))
     dunst # Notification daemon
     libnotify
-    swww
+    swww # Wallpapaer
     rofi-wayland
     networkmanagerapplet
     wofi # Wayland app launcher
+    pipewire # For screensharing
+    hyprpolkitagent # Authentication daemon
 
     # Gaming
     wineWowPackages.stable
