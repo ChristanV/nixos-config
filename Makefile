@@ -29,3 +29,6 @@ upgrade:
 
 format:
 	@nixfmt configuration.nix
+
+show:
+	@fastfetch
