@@ -89,7 +89,7 @@ in
     extraGroups = [
       "networkmanager"
       "wheel"
-      "docker"
+      #"docker" # Opt for running rootless
       "audio"
       "video"
       "input"
