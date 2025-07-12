@@ -257,6 +257,7 @@ in
     bruno
     dbeaver-bin
     vscode
+    libsForQt5.dolphin # Filemanager
 
     # Security
     clamav
@@ -297,9 +298,11 @@ in
     starship
     glow
     nvidia-container-toolkit
-    btop
+    btop-cuda
+    nvtopPackages.nvidia
     plantuml
     graphviz
+    fastfetch
 
     # LSP's for neovim
     terraform-ls
@@ -341,16 +344,16 @@ in
     kitty
 
     # hyprland
-    waybar
+    waybar # Info bar app
     (pkgs.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     }))
-    dunst
+    dunst # Notification daemon
     libnotify
     swww
     rofi-wayland
     networkmanagerapplet
-    wofi
+    wofi # Wayland app launcher
 
     # Gaming
     wineWowPackages.stable
