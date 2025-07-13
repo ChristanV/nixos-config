@@ -5,7 +5,6 @@ let
   userName = "christan";
   hostName = "nixos";
   grubDevice = "/dev/nvme0n1";
-  networkInterfaceName = "enp0s31f6";
 
   azure-cli = pkgs.azure-cli.withExtensions [
     pkgs.azure-cli-extensions.bastion
@@ -26,32 +25,9 @@ in
   boot.loader.grub.enable = true;
   boot.loader.grub.device = grubDevice;
   boot.loader.grub.useOSProber = true;
-  boot.kernelModules = [
-    "e1000e"
-  ];
 
   networking.hostName = hostName;
   networking.networkmanager.enable = true;
-
-  # Workaround to get full speed on network since it defaults to 100mpbs
-  # Will cause network break on startup for a small while
-  # Waits for connection to establish then will upgrade to speed
-#  systemd.services.set-nic-speed = {
-#    description = "Set NIC speed to 1000Mbps Full Duplex";
-#    serviceConfig = {
-#      Type = "oneshot";
-#      ExecStart = "/run/current-system/sw/bin/ethtool -s ${networkInterfaceName} speed 1000 duplex full autoneg off";
-#      ConditionPathExists = "/sys/class/net/${networkInterfaceName}";
-#    };
-#  };
-#
-#  systemd.timers.set-nic-speed = {
-#    wantedBy = [ "timers.target" ];
-#    timerConfig = {
-#      OnBootSec = "60s";
-#      Unit = "set-nic-speed.service";
-#    };
-#  };
 
   # https://nixos.wiki/wiki/Firewall
   networking.firewall.enable = true; # This will make all local ports and services unreachable from external connections.
