@@ -22,8 +22,11 @@ in
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnsupportedSystem = false;
 
+  boot.loader.systemd-boot.enable = false;
+  boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = grubDevice;
+  boot.loader.grub.devices = [ grubDevice ];
+  boot.loader.grub.efiSupport = true;
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = hostName;
@@ -238,6 +241,7 @@ in
   };
 
   hardware = {
+    enableAllFirmware = true;
     graphics = {
       enable = true;
     };
