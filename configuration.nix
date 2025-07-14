@@ -22,12 +22,12 @@ in
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnsupportedSystem = false;
 
-  boot.loader.systemd-boot.enable = false;
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.devices = [ grubDevice ];
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = true;
+  boot.kernelModules = [
+	"r8125"
+	"e1000e"
+  ];
 
   networking.hostName = hostName;
   networking.networkmanager.enable = true;
@@ -58,8 +58,8 @@ in
   };
 
   # Enable the GNOME Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   # Enable KDE plasma
   # services.displayManager.sddm.enable = true;
@@ -123,7 +123,7 @@ in
   programs.sway.enable = false;
 
   programs.hyprland = {
-    enable = true;
+    enable = false;
     withUWSM = false;
     xwayland.enable = true;
   };
