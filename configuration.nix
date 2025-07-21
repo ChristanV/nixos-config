@@ -203,6 +203,10 @@ in
     export KUBE_CONFIG_PATH=~/.kube/config
     export STARSHIP_CONFIG=~/.config/starship-config/starship.toml
 
+    # Disabling paging by default
+    export PAGER=cat
+    export LESS=
+
     cat << EOF > ~/.zshrc
     ZSH_HIGHLIGHT_STYLES[comment]='fg=8'                # gray
     ZSH_HIGHLIGHT_STYLES[command]='fg=#769ff0'
