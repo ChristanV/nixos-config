@@ -4,7 +4,6 @@ let
   # unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
   userName = "christan";
   hostName = "nixos";
-  grubDevice = "/dev/nvme0n1";
 
   azure-cli = pkgs.azure-cli.withExtensions [
     pkgs.azure-cli-extensions.bastion
@@ -25,9 +24,20 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelModules = [
-	"r8125"
-	"e1000e"
+    "r8125"
+    "e1000e"
+    "snd_hda_intel"
+    "snd_soc_skl"
+    "snd_usb_audio"
+    "snd_pcm"
   ];
+
+
+  programs.hyprland = {
+    enable = true;
+    withUWSM = false;
+    xwayland.enable = true;
+  };
 
   networking.hostName = hostName;
   networking.networkmanager.enable = true;
@@ -57,16 +67,10 @@ in
     variant = "";
   };
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Enable KDE plasma
-  # services.displayManager.sddm.enable = true;
-  # services.desktopManager.plasma6.enable = true;
-
   services.xserver.enable = true;
+  services.displayManager.sddm.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
+  # services.desktopManager.plasma6.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -76,14 +80,14 @@ in
   services.displayManager.autoLogin.user = "christan";
 
   # Sound
-  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # jack.enable = true;
+    jack.enable = true;
+    wireplumber.enable = true;
   };
 
   users.users."${userName}" = {
@@ -122,17 +126,11 @@ in
   programs.firefox.enable = true;
   programs.sway.enable = false;
 
-  programs.hyprland = {
-    enable = false;
-    withUWSM = false;
-    xwayland.enable = true;
-  };
-
   # Hyprland themes workaround
   programs.dconf.profiles.user.databases = [
     {
       settings."org/gnome/desktop/interface" = {
-        gtk-theme = "Adwaita";
+        gtk-theme = "Adwaita-dark";
         icon-theme = "Flat-Remix-Red-Dark";
         font-name = "Noto Sans Medium 11";
         document-font-name = "Noto Sans Medium 11";
@@ -198,6 +196,9 @@ in
     # Fix for ollama for neovim
     export XDG_RUNTIME_DIR="/tmp/"
 
+    # Fix for D-Bus session for systemctl --user
+    export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+
     export EDITOR="nvim"
     export KUBE_CONFIG_PATH=~/.kube/config
     export STARSHIP_CONFIG=~/.config/starship-config/starship.toml
@@ -221,10 +222,17 @@ in
       xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal-gtk
     ];
+    configPackages = [ pkgs.xdg-desktop-portal-hyprland ];
   };
+
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
+  };
+
+  environment.variables = {
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_TYPE = "wayland";
   };
 
   virtualisation.docker = {
@@ -241,7 +249,6 @@ in
   };
 
   hardware = {
-    enableAllFirmware = true;
     graphics = {
       enable = true;
     };
@@ -261,20 +268,21 @@ in
 
   environment.systemPackages = with pkgs; [
     # Desktop apps
-    brave
-    chromium
+    google-chrome
     steam-run
     nordpass
     bruno
     dbeaver-bin
     vscode
     nemo # Filemanager
+    nwg-look # Themes
 
     # Security
     clamav
 
     # Core Packages
     neovim
+    vimPlugins.packer-nvim
     gnumake
     busybox
     wget
@@ -351,6 +359,7 @@ in
     jdk23
     nixfmt-rfc-style
     gitleaks
+    chromedriver
 
     # Terminals
     wezterm
@@ -366,9 +375,9 @@ in
     swww # Wallpapaer
     rofi-wayland
     networkmanagerapplet
-    wofi # Wayland app launcher
-    pipewire # For screensharing
     hyprpolkitagent # Authentication daemon
+    kdePackages.qt6ct
+    gsettings-desktop-schemas
 
     # Gaming
     wineWowPackages.stable
