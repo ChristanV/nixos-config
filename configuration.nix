@@ -280,6 +280,8 @@ in
     vscode
     nemo # Filemanager
     nwg-look # Themes
+    pavucontrol # Sound Control
+    vlc
 
     # Security
     clamav
