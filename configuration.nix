@@ -46,7 +46,6 @@ in
     "snd_soc_skl"
     "snd_usb_audio"
     "snd_pcm"
-    "uvcvideo" # For webcam
   ];
 
   programs.hyprland = {
