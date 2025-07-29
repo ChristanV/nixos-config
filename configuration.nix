@@ -18,6 +18,22 @@ in
 
   system.stateVersion = "25.05";
 
+  system.autoUpgrade = {
+    enable = true;
+    flags = [
+      "--print-build-logs"
+    ];
+    dates = "12:00";
+    randomizedDelaySec = "45min";
+    allowReboot = false;
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 10d";
+  };
+
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnsupportedSystem = false;
 
@@ -31,7 +47,6 @@ in
     "snd_usb_audio"
     "snd_pcm"
   ];
-
 
   programs.hyprland = {
     enable = true;
@@ -285,6 +300,10 @@ in
 
     # Security
     clamav
+    clamtk
+
+    # Storage Viewer
+    baobab
 
     # Core Packages
     neovim
