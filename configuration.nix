@@ -343,7 +343,6 @@ in
     glow
     nvidia-container-toolkit
     btop-cuda
-    nvtopPackages.nvidia
     plantuml
     graphviz
     fastfetch
