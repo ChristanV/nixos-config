@@ -46,6 +46,7 @@ in
     "snd_soc_skl"
     "snd_usb_audio"
     "snd_pcm"
+    "uvcvideo" # For webcam
   ];
 
   programs.hyprland = {
@@ -81,6 +82,9 @@ in
     layout = "za";
     variant = "";
   };
+
+  # Required for password manager
+  services.gnome.gnome-keyring.enable = true;
 
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
@@ -297,6 +301,7 @@ in
     nwg-look # Themes
     pavucontrol # Sound Control
     vlc
+    teams-for-linux
 
     # Security
     clamav
@@ -349,6 +354,12 @@ in
     ethtool
     kustomize
 
+    # Required for password manager
+    gnome-keyring
+    libsecret
+    # GNOME webcam viewer
+    cheese
+
     # LSP's for neovim
     terraform-ls
     terraform-lsp
@@ -400,6 +411,7 @@ in
     rofi-wayland
     networkmanagerapplet
     hyprpolkitagent # Authentication daemon
+    hyprlock
     kdePackages.qt6ct
     gsettings-desktop-schemas
 
