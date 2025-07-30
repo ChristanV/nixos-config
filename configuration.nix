@@ -20,9 +20,7 @@ in
 
   system.autoUpgrade = {
     enable = true;
-    flags = [
-      "--print-build-logs"
-    ];
+    flags = [];
     dates = "12:00";
     randomizedDelaySec = "45min";
     allowReboot = false;
