@@ -20,7 +20,7 @@ in
 
   system.autoUpgrade = {
     enable = true;
-    flags = [];
+    flags = [ ];
     dates = "12:00";
     randomizedDelaySec = "45min";
     allowReboot = false;
@@ -179,6 +179,80 @@ in
         "terraform"
       ];
     };
+
+    # Persist ENV vars accross terminal instances
+    shellInit = ''
+      AWS_SECRETS_FILE="$HOME/.config/secrets/awsenv"
+      awsctx() {
+          local profile
+          
+          # Create secrets directory if it doesn't exist
+          mkdir -p "$(dirname "$AWS_SECRETS_FILE")"
+          
+          # Get profile selection
+          profile=$(sed -n "s/\[profile \(.*\)\]/\1/gp" ~/.aws/config | fzf)
+          
+          if [ -n "$profile" ]; then
+              # Export for current session
+              export AWS_PROFILE="$profile"
+              
+              # Update secrets file for persistence
+              if [ -f "$AWS_SECRETS_FILE" ]; then
+                  # Remove existing AWS_PROFILE line
+                  sed -i '/^export AWS_PROFILE=/d' "$AWS_SECRETS_FILE"
+              else
+                  touch "$AWS_SECRETS_FILE"
+                  chmod 600 "$AWS_SECRETS_FILE"
+              fi
+              
+              # Add new AWS_PROFILE line
+              echo "export AWS_PROFILE=\"$profile\"" >> "$AWS_SECRETS_FILE"
+          else
+              echo "No profile selected"
+          fi
+      }
+
+      ONEPASS_SECRETS_FILE="$HOME/.config/secrets/onepassenv"
+      oplogin() {
+          local profile
+          
+          # Create secrets directory if it doesn't exist
+          mkdir -p "$(dirname "$ONEPASS_SECRETS_FILE")"
+          
+          echo "Signing in to 1Password..."
+          profile=$(op signin --raw)
+
+          if [ -n "$profile" ]; then
+              # Export for current session
+              export OP_SESSION_GHVJK7LLTZFHTPYPNTI5A3JZV4="$profile"
+              
+              # Update secrets file for persistence
+              if [ -f "$ONEPASS_SECRETS_FILE" ]; then
+                  sed -i '/^export OP_SESSION_GHVJK7LLTZFHTPYPNTI5A3JZV4=/d' "$ONEPASS_SECRETS_FILE"
+              else
+                  touch "$ONEPASS_SECRETS_FILE"
+                  chmod 600 "$ONEPASS_SECRETS_FILE"
+              fi
+              
+              echo "export OP_SESSION_GHVJK7LLTZFHTPYPNTI5A3JZV4=\"$profile\"" >> "$ONEPASS_SECRETS_FILE"
+          fi
+      }
+    '';
+
+    # Source secrets file on every shell initialization
+    interactiveShellInit = ''
+      if [ -f "$HOME/.config/secrets/awsenv" ]; then
+          source "$HOME/.config/secrets/awsenv"
+      fi
+      if [ -f "$HOME/.config/secrets/onepassenv" ]; then
+          source "$HOME/.config/secrets/onepassenv"
+      fi
+
+      # Source Other env vars - manually add these
+      if [ -f "$HOME/.config/secrets/env" ]; then
+          source "$HOME/.config/secrets/env"
+      fi
+    '';
   };
 
   programs.steam = {
@@ -299,10 +373,12 @@ in
     pavucontrol # Sound Control
     vlc
     teams-for-linux
+    _1password-gui
 
     # Security
     clamav
     clamtk
+    _1password-cli
 
     # Storage Viewer
     baobab
@@ -392,6 +468,11 @@ in
     nixfmt-rfc-style
     gitleaks
     chromedriver
+    pre-commit
+    trunk-io
+    tfsec
+    terraform-docs
+    tfupdate
 
     # Terminals
     wezterm
