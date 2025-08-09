@@ -1,7 +1,11 @@
 { config, pkgs, ... }:
 
 let
-  # unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+  unstable = import <nixos-unstable> {
+    config = {
+      allowUnfree = true;
+    };
+  };
   userName = "christan";
   hostName = "nixos";
 
@@ -255,6 +259,10 @@ in
     '';
   };
 
+  systemd.tmpfiles.rules = [
+    "L+ /bin/bash - - - - ${pkgs.bash}/bin/bash"
+  ];
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
@@ -472,6 +480,7 @@ in
     tfsec
     terraform-docs
     tfupdate
+    unstable.claude-code
 
     # Terminals
     wezterm
