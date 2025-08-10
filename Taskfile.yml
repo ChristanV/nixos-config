@@ -1,0 +1,61 @@
+version: '3'
+
+tasks:
+  switch:
+    desc: 'Switching to new NixOs configuration'
+    cmds:
+      - echo 'Switching to new NixOs configuration'
+      - nixos-rebuild switch --flake .
+    silent: false
+
+  build:
+    desc: 'Building new NixOs configuration'
+    cmds:
+      - echo 'Building new NixOs configuration'
+      - nixos-rebuild build --flake .
+    silent: false
+
+  boot:
+    desc: 'Boot to new NixOs configuration'
+    cmds:
+      - echo 'Boot to new NixOs configuration'
+      - nixos-rebuild boot --flake .
+    silent: false
+
+  test:
+    desc: 'Test new NixOs configuration'
+    cmds:
+      - echo 'Test new NixOs configuration'
+      - nixos-rebuild test --flake .
+    silent: false
+
+  channel-update:
+    desc: 'Update nix channels'
+    cmds:
+      - nix-channel --update
+    silent: false
+
+  cleanup:
+    desc: 'Clean up old nix generations'
+    cmds:
+      - nix-collect-garbage -d --delete-older-than 3d
+    silent: false
+
+  upgrade:
+    desc: 'Upgrade to new NixOs configuration'
+    cmds:
+      - echo 'Upgrade to new NixOs configuration'
+      - nixos-rebuild switch --upgrade --flake .
+    silent: false
+
+  format:
+    desc: 'Format NixOS configuration files'
+    cmds:
+      - nixfmt configuration.nix
+    silent: false
+
+  show:
+    desc: 'Show system information'
+    cmds:
+      - fastfetch
+    silent: false
