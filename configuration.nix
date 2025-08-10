@@ -398,7 +398,6 @@ in
     # Desktop apps
     google-chrome
     steam-run
-    nordpass
     bruno
     dbeaver-bin
     vscode
