@@ -35,7 +35,13 @@ tasks:
       - nix-channel --update
     silent: false
 
-  cleanup:
+  flake-update:
+    desc: 'Update flakes'
+    cmds:
+      - nix flake update
+    silent: false
+
+  clean:
     desc: 'Clean up old nix generations'
     cmds:
       - nix-collect-garbage -d --delete-older-than 3d
@@ -52,10 +58,19 @@ tasks:
     desc: 'Format NixOS configuration files'
     cmds:
       - nixfmt configuration.nix
+      - nixfmt flake.nix
+      - nixfmt var.nix
     silent: false
 
   show:
     desc: 'Show system information'
     cmds:
       - fastfetch
+    silent: false
+
+  channel-add:
+    desc: 'Adding channels'
+    cmds:
+      - nix-channel --add https://nixos.org/channels/nixos-25.05 nixos
+      # - nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable
     silent: false

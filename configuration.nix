@@ -1,15 +1,11 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  var,
+  inputs,
+  ...
+}:
 
-let
-  userName = "christan";
-  hostName = "nixos";
-
-  azure-cli = pkgs.azure-cli.withExtensions [
-    pkgs.azure-cli-extensions.bastion
-    pkgs.azure-cli-extensions.ssh
-  ];
-
-in
 {
   imports = [
     ./hardware-configuration.nix
@@ -24,6 +20,7 @@ in
 
   system.autoUpgrade = {
     enable = true;
+    #flake = inputs.self.outPath;
     flags = [ ];
     dates = "12:00";
     randomizedDelaySec = "45min";
@@ -56,7 +53,7 @@ in
     xwayland.enable = true;
   };
 
-  networking.hostName = hostName;
+  networking.hostName = var.hostname;
   networking.networkmanager.enable = true;
 
   # https://nixos.wiki/wiki/Firewall
@@ -110,9 +107,9 @@ in
     wireplumber.enable = true;
   };
 
-  users.users."${userName}" = {
+  users.users."${var.username}" = {
     isNormalUser = true;
-    description = "${userName}";
+    description = "${var.username}";
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -294,7 +291,7 @@ in
 
   programs._1password-gui = {
     enable = true;
-    polkitPolicyOwners = [ "${userName}" ];
+    polkitPolicyOwners = [ "${var.username}" ];
   };
 
   environment.variables.EDITOR = "nvim";
@@ -371,7 +368,7 @@ in
       setSocketVariable = true;
       daemon.settings = {
         features.cdi = true;
-        cdi-spec-dirs = [ "/home/${userName}/.cdi" ];
+        cdi-spec-dirs = [ "/home/${var.username}/.cdi" ];
       };
     };
   };
@@ -393,142 +390,4 @@ in
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
   };
-
-  environment.systemPackages = with pkgs; [
-    # Desktop apps
-    google-chrome
-    steam-run
-    bruno
-    dbeaver-bin
-    vscode
-    nemo # Filemanager
-    nwg-look # Themes
-    pavucontrol # Sound Control
-    vlc
-    teams-for-linux
-    _1password-gui
-
-    # Security
-    clamav
-    clamtk
-    _1password-cli
-    sbctl
-
-    # Storage Viewer
-    baobab
-
-    # Core Packages
-    neovim
-    vimPlugins.packer-nvim
-    gnumake
-    busybox
-    wget
-    stern
-    jq
-    yq
-    kubernetes-helm
-    openssl
-    go-task
-    virtualenv
-    kubectl
-    kubectx
-    kubelogin
-    git
-    postgresql
-    eksctl
-    lazygit
-    fd
-    ripgrep
-    flyctl
-    sops
-    gnupg
-    k9s
-    ssm-session-manager-plugin
-    azure-cli
-    awscli2
-    docker_28
-    docker-compose
-    zsh
-    steampipe
-    fzf
-    starship
-    glow
-    nvidia-container-toolkit
-    btop-cuda
-    plantuml
-    graphviz
-    fastfetch
-    ethtool
-    kustomize
-
-    # Required for password manager
-    gnome-keyring
-    libsecret
-    # GNOME webcam viewer
-    cheese
-
-    # LSP's for neovim
-    terraform-ls
-    terraform-lsp
-    tflint
-    yaml-language-server
-    ansible-language-server
-    ansible-lint
-    lua-language-server
-    nodePackages.typescript-language-server
-    nodePackages.bash-language-server
-    jdt-language-server
-    postgres-lsp
-    dockerfile-language-server-nodejs
-    pyright
-    gopls
-    nodePackages.typescript-language-server
-    helm-ls
-    nixd
-
-    # Development
-    terraform
-    terragrunt
-    python312Full
-    python312Packages.ansible-core
-    go
-    nodejs_22
-    typescript
-    lua
-    yarn
-    k3s
-    minikube
-    jdk23
-    nixfmt-rfc-style
-    gitleaks
-    chromedriver
-    pre-commit
-    trunk-io
-    tfsec
-    terraform-docs
-    tfupdate
-
-    # Terminals
-    wezterm
-    kitty
-
-    # hyprland
-    waybar # Info bar app
-    (pkgs.waybar.overrideAttrs (oldAttrs: {
-      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-    }))
-    dunst # Notification daemon
-    libnotify
-    swww # Wallpapaer
-    rofi-wayland
-    networkmanagerapplet
-    hyprpolkitagent # Authentication daemon
-    hyprlock
-    kdePackages.qt6ct
-    gsettings-desktop-schemas
-
-    # Gaming
-    wineWowPackages.stable
-    winetricks
-  ];
 }
