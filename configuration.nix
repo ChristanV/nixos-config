@@ -20,7 +20,7 @@
 
   system.autoUpgrade = {
     enable = true;
-    #flake = inputs.self.outPath;
+    flake = inputs.self.outPath;
     flags = [ ];
     dates = "12:00";
     randomizedDelaySec = "45min";

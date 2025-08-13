@@ -23,13 +23,14 @@
       nixpkgs-unstable,
       lanzaboote,
       ...
-    }:
+    } @inputs :
     let
       var = import ./var.nix;
     in
     {
       nixosConfigurations."${var.hostname}" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           { nix.registry.nixpkgs.flake = nixpkgs; }
           lanzaboote.nixosModules.lanzaboote
