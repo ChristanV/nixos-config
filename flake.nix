@@ -74,12 +74,12 @@
                 pavucontrol # Sound Control
                 vlc
                 teams-for-linux
-                _1password-gui
 
                 # Security
                 clamav
                 clamtk
-                _1password-cli
+                unstable._1password-gui
+                unstable._1password-cli
                 sbctl
 
                 # Storage Viewer
