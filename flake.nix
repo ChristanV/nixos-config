@@ -107,6 +107,7 @@
                 lazygit
                 fd
                 ripgrep
+                zoxide
                 flyctl
                 sops
                 gnupg
@@ -120,6 +121,7 @@
                 docker_28
                 docker-compose
                 zsh
+                zsh-fzf-tab
                 steampipe
                 fzf
                 starship

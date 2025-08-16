@@ -178,11 +178,13 @@
         "pip"
         "ssh"
         "terraform"
+        "fzf"
       ];
     };
 
     # Persist ENV vars accross terminal instances
     shellInit = ''
+      source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
       AWS_SECRETS_FILE="$HOME/.config/secrets/awsenv"
       awsctx() {
           local profile
