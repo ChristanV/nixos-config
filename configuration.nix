@@ -304,7 +304,7 @@
     alias kns='kubens'
     alias tf='terraform'
     alias tg='terragrunt'
-    alias vi='nvim .'
+    vi() { if [ $# -eq 0 ]; then nvim .; else nvim "$@"; fi; }
     alias ll='ls -alF'
     alias la='ls -A'
     alias l='ls -CF'
