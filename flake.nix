@@ -23,7 +23,7 @@
       nixpkgs-unstable,
       lanzaboote,
       ...
-    } @inputs :
+    }@inputs:
     let
       var = import ./var.nix;
     in
@@ -158,6 +158,10 @@
                 helm-ls
                 nixd
 
+                # Linters and checkers
+                statix
+                deadnix
+
                 # Development
                 terraform
                 terragrunt
@@ -175,12 +179,13 @@
                 gitleaks
                 chromedriver
                 pre-commit
-                trunk-io
+                unstable.trunk-io
                 tfsec
                 terraform-docs
                 tfupdate
                 terrascan
                 unstable.claude-code
+                gh
 
                 # Terminals
                 wezterm

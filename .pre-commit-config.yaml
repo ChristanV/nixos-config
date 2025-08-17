@@ -1,0 +1,44 @@
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-added-large-files
+  - repo: local
+    hooks:
+      - id: nixfmt
+        name: nixfmt
+        entry: nixfmt
+        language: system
+        files: \.nix$
+        exclude: ^hardware-configuration\.nix$
+      - id: deadnix
+        name: deadnix
+        entry: deadnix
+        language: system
+        files: \.nix$
+        exclude: ^hardware-configuration\.nix$
+        args: [--edit]
+      - id: statix
+        name: statix
+        entry: bash -c 'statix check --ignore hardware-configuration.nix'
+        language: system
+        files: \.nix$
+        pass_filenames: false
+      - id: nix-flake-check
+        name: nix flake check
+        entry: nix flake check
+        language: system
+        exclude: ^hardware-configuration\.nix$
+        files: \.nix$|flake\.lock$
+        pass_filenames: false
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-yaml
