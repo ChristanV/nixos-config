@@ -209,6 +209,9 @@
                 # Gaming
                 wineWowPackages.stable
                 winetricks
+
+                # Other
+                vdhcoapp
               ];
             }
           )
