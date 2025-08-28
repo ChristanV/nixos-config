@@ -240,17 +240,28 @@
                 # Export for current session
                 export AWS_PROFILE="$profile"
 
+                # Get credentials and export them
+                local creds=$(aws configure export-credentials --profile "$profile" --format env)
+                if [ $? -eq 0 ]; then
+                    eval "$creds"
+                fi
+
                 # Update secrets file for persistence
                 if [ -f "$AWS_SECRETS_FILE" ]; then
-                    # Remove existing AWS_PROFILE line
-                    sed -i '/^export AWS_PROFILE=/d' "$AWS_SECRETS_FILE"
+                    # Remove existing AWS lines
+                    sed -i '/^export AWS_/d' "$AWS_SECRETS_FILE"
                 else
                     touch "$AWS_SECRETS_FILE"
                     chmod 600 "$AWS_SECRETS_FILE"
                 fi
 
-                # Add new AWS_PROFILE line
+                # Add AWS_PROFILE line
                 echo "export AWS_PROFILE=\"$profile\"" >> "$AWS_SECRETS_FILE"
+                
+                # Add credential environment variables to secrets file
+                if [ -n "$creds" ]; then
+                    echo "$creds" >> "$AWS_SECRETS_FILE"
+                fi
             else
                 echo "No profile selected"
             fi
