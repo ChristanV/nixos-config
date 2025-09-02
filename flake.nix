@@ -165,8 +165,8 @@
                 # Development
                 terraform
                 terragrunt
-                python312Full
-                python312Packages.ansible-core
+                python313
+                poetry
                 go
                 nodejs_22
                 typescript
