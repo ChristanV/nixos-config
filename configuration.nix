@@ -220,6 +220,7 @@
           "ssh"
           "terraform"
           "fzf"
+          "poetry"
         ];
       };
 
@@ -352,6 +353,8 @@
 
     etc."zshrc".text = ''
       eval "$(starship init zsh)"
+      poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
+
       alias kc='kubectl'
       alias kctx='kubectx'
       alias kns='kubens'
