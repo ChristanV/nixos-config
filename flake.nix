@@ -185,6 +185,7 @@
                 tfupdate
                 terrascan
                 unstable.claude-code
+                gemini-cli
                 gh
 
                 # Terminals
