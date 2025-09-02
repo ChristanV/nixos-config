@@ -240,12 +240,6 @@
                 # Export for current session
                 export AWS_PROFILE="$profile"
 
-                # Get credentials and export them
-                local creds=$(aws configure export-credentials --profile "$profile" --format env)
-                if [ $? -eq 0 ]; then
-                    eval "$creds"
-                fi
-
                 # Update secrets file for persistence
                 if [ -f "$AWS_SECRETS_FILE" ]; then
                     # Remove existing AWS lines
