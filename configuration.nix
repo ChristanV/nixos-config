@@ -357,7 +357,6 @@
       alias kns='kubens'
       alias tf='terraform'
       alias tg='terragrunt'
-      vi() { if [ $# -eq 0 ]; then nvim .; else nvim "$@"; fi; }
       alias ll='ls -alF'
       alias la='ls -A'
       alias l='ls -CF'
@@ -388,6 +387,25 @@
       # Disabling paging by default
       export PAGER=cat
       export LESS=
+
+      # Functions
+      vi() { 
+        if [ $# -eq 0 ]; then 
+          nvim .; 
+        else 
+          nvim "$@"; 
+        fi; 
+      }
+
+      venv() {
+         virtual_env_path="$HOME/.virtualenvs/''${PWD##*/}"
+         if [ ! -d "$virtual_env_path" ]; then
+           echo "Creating virtual environment..."
+           python3 -m venv $virtual_env_path
+         fi
+         echo "Activating virtual environment..."
+         source $virtual_env_path/bin/activate
+       }
 
       cat << EOF > ~/.zshrc
       ZSH_HIGHLIGHT_STYLES[comment]='fg=8'                # gray
