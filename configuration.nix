@@ -25,10 +25,13 @@
   };
 
   nix = {
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      ssl-cert-file = "/etc/ssl/certs/ca-bundle.crt";
+    };
 
     gc = {
       automatic = true;
@@ -151,6 +154,9 @@
       '';
     };
     rtkit.enable = true;
+    pki.certificates = [
+      "/etc/ssl/certs/ca-bundle.crt"
+    ];
   };
 
   systemd = {
@@ -326,6 +332,12 @@
         fi
       '';
     };
+
+    nix-ld = {
+      enable = true;
+      package = pkgs.nix-ld-rs;
+      libraries = with pkgs; [ libxcrypt-legacy ];
+    };
   };
 
   # Hyprland
@@ -349,12 +361,13 @@
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_TYPE = "wayland";
       EDITOR = "nvim";
+      # Fix for Trunk
+      NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
+      SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
     };
 
     etc."zshrc".text = ''
       eval "$(starship init zsh)"
-      poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
-
       alias kc='kubectl'
       alias kctx='kubectx'
       alias kns='kubens'
@@ -392,12 +405,12 @@
       export LESS=
 
       # Functions
-      vi() { 
-        if [ $# -eq 0 ]; then 
-          nvim .; 
-        else 
-          nvim "$@"; 
-        fi; 
+      vi() {
+        if [ $# -eq 0 ]; then
+          nvim .;
+        else
+          nvim "$@";
+        fi;
       }
 
       venv() {
