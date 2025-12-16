@@ -164,8 +164,8 @@
                 # Development
                 terraform
                 terragrunt
-                python311
-                python311Packages.pip
+                python312
+                python312Packages.pip
                 poetry
                 go
                 nodejs_24
