@@ -3,11 +3,11 @@
   description = "A SecureBoot-enabled NixOS configurations and always updated packages";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
+      url = "github:nix-community/lanzaboote/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -144,14 +144,13 @@
                 terraform-ls
                 tflint
                 yaml-language-server
-                ansible-language-server
                 ansible-lint
                 lua-language-server
                 nodePackages.typescript-language-server
                 nodePackages.bash-language-server
                 jdt-language-server
-                postgres-lsp
-                dockerfile-language-server-nodejs
+                postgres-language-server
+                dockerfile-language-server
                 pyright
                 gopls
                 nodePackages.typescript-language-server
@@ -175,7 +174,7 @@
                 yarn
                 k3s
                 minikube
-                jdk23
+                jdk25
                 nixfmt-rfc-style
                 gitleaks
                 chromedriver
@@ -202,7 +201,7 @@
                 dunst # Notification daemon
                 libnotify
                 swww # Wallpapaer
-                rofi-wayland
+                rofi
                 networkmanagerapplet
                 hyprpolkitagent # Authentication daemon
                 hyprlock
@@ -215,6 +214,7 @@
 
                 # Other
                 vdhcoapp
+                zip
               ];
             }
           )
