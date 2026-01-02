@@ -166,12 +166,14 @@
                 terragrunt
                 python312
                 python312Packages.pip
+                python312Packages.ansible-core
                 poetry
                 go
                 nodejs_24
                 typescript
                 lua
                 yarn
+                kind
                 k3s
                 minikube
                 jdk25
