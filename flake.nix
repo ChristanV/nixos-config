@@ -74,6 +74,7 @@
                 pavucontrol # Sound Control
                 vlc
                 teams-for-linux
+                libreoffice
 
                 # Security
                 clamav
