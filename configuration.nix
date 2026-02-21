@@ -389,6 +389,7 @@
       alias nixs='nix-shell --run zsh'
       alias nixr='sudo nixos-rebuild switch'
       alias nixb='nixos-rebuild build'
+      alias sprite='~/.local/bin/sprite'
 
       # Fix for ollama for neovim
       export XDG_RUNTIME_DIR="/tmp/"
