@@ -94,7 +94,7 @@
                 wget
                 stern
                 jq
-                yq
+                yq-go
                 kubernetes-helm
                 openssl
                 go-task
@@ -191,6 +191,8 @@
                 unstable.claude-code
                 gemini-cli
                 gh
+                direnv
+                devenv
 
                 # Terminals
                 wezterm

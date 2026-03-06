@@ -352,6 +352,8 @@
   };
 
   environment = {
+    etc."ssl/cert.pem".source = "/etc/ssl/certs/ca-bundle.crt";
+
     sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = "1";
       NIXOS_OZONE_WL = "1";
