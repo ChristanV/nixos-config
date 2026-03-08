@@ -157,6 +157,10 @@
     pki.certificates = [
       "/etc/ssl/certs/ca-bundle.crt"
     ];
+    pam.services = {
+      sddm.enableGnomeKeyring = true;
+      login.enableGnomeKeyring = true;
+    };
   };
 
   systemd = {
@@ -171,6 +175,11 @@
   programs = {
     firefox.enable = true;
     sway.enable = false;
+
+    chromium = {
+      enable = true;
+      extraOpts = { };
+    };
 
     hyprland = {
       enable = true;
