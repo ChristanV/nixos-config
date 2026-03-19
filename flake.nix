@@ -181,6 +181,7 @@
                 nixfmt-rfc-style
                 gitleaks
                 chromedriver
+                brave
                 pre-commit
                 libxcrypt
                 unstable.trunk-io
