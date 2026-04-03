@@ -11,10 +11,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    claude-code = {
-      url = "github:sadjow/claude-code-nix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    # claude-code = {
+    #   url = "github:sadjow/claude-code-nix";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
   };
 
   outputs =
@@ -189,8 +189,10 @@
                 terraform-docs
                 tfupdate
                 terrascan
-                unstable.claude-code
+                #unstable.claude-code
                 gemini-cli
+                github-copilot-cli
+                unstable.zed-editor
                 gh
                 direnv
                 devenv

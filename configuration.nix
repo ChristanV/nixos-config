@@ -26,6 +26,7 @@
 
   nix = {
     settings = {
+      download-buffer-size = 524288000; # 500 MiB
       experimental-features = [
         "nix-command"
         "flakes"
@@ -113,7 +114,7 @@
     # Enable automatic login for the user.
     displayManager = {
       sddm.enable = true;
-      autoLogin.enable = true;
+      autoLogin.enable = false;
       autoLogin.user = "christan";
     };
 
@@ -144,7 +145,6 @@
 
   # Security
   security = {
-    sudo.wheelNeedsPassword = true;
     apparmor.enable = true;
     audit.enable = true;
     sudo = {
@@ -154,9 +154,6 @@
       '';
     };
     rtkit.enable = true;
-    pki.certificates = [
-      "/etc/ssl/certs/ca-bundle.crt"
-    ];
     pam.services = {
       sddm.enableGnomeKeyring = true;
       login.enableGnomeKeyring = true;
@@ -267,7 +264,7 @@
 
                 # Add AWS_PROFILE line
                 echo "export AWS_PROFILE=\"$profile\"" >> "$AWS_SECRETS_FILE"
-                
+
                 # Add credential environment variables to secrets file
                 if [ -n "$creds" ]; then
                     echo "$creds" >> "$AWS_SECRETS_FILE"
@@ -396,14 +393,11 @@
       alias awsconfigure='aws configure sso --profile '
       alias awssso='aws configure sso-session'
       alias show='fastfetch'
-      alias nix-shell'nix-shell --run zsh'
+      alias nix-shell='nix-shell --run zsh'
       alias nixs='nix-shell --run zsh'
       alias nixr='sudo nixos-rebuild switch'
       alias nixb='nixos-rebuild build'
       alias sprite='~/.local/bin/sprite'
-
-      # Fix for ollama for neovim
-      export XDG_RUNTIME_DIR="/tmp/"
 
       # Fix for D-Bus session for systemctl --user
       export XDG_RUNTIME_DIR="/run/user/$(id -u)"
