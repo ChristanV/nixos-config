@@ -11,10 +11,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # claude-code = {
-    #   url = "github:sadjow/claude-code-nix";
-    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-    # };
+    claude-code = {
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -156,6 +156,7 @@
                 gopls
                 nodePackages.typescript-language-server
                 helm-ls
+                nil
                 nixd
 
                 # Linters and checkers
