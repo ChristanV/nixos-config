@@ -17,7 +17,6 @@ lint:
     - trufflehog@3.90.13
     - git-diff-check
     - gitleaks@8.30.0
-    - statix@SYSTEM
     - deadnix@SYSTEM
     - nixfmt@SYSTEM
     - shellcheck@0.11.0
