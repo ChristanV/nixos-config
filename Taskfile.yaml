@@ -4,16 +4,22 @@ version: "3"
 tasks:
   switch:
     desc: "Switching to new NixOs configuration"
+    vars:
+      HOST:
+        sh: printf '%s\n' nixos wsl | fzf --prompt="Select host> "
     cmds:
-      - echo 'Switching to new NixOs configuration'
-      - nixos-rebuild switch --flake .
+      - echo 'Switching to new NixOs configuration ({{.HOST}})'
+      - nixos-rebuild switch --flake .#{{.HOST}}
     silent: false
 
   build:
     desc: "Building new NixOs configuration"
+    vars:
+      HOST:
+        sh: printf '%s\n' nixos wsl | fzf --prompt="Select host> "
     cmds:
-      - echo 'Building new NixOs configuration'
-      - nixos-rebuild build --flake .
+      - echo 'Building new NixOs configuration ({{.HOST}})'
+      - nixos-rebuild build --flake .#{{.HOST}}
     silent: false
 
   boot:
@@ -25,9 +31,22 @@ tasks:
 
   test:
     desc: "Test new NixOs configuration"
+    vars:
+      HOST:
+        sh: printf '%s\n' nixos wsl | fzf --prompt="Select host> "
     cmds:
-      - echo 'Test new NixOs configuration'
-      - nixos-rebuild test --flake .
+      - echo 'Test new NixOs configuration ({{.HOST}})'
+      - nixos-rebuild test --flake .#{{.HOST}}
+    silent: false
+
+  upgrade:
+    desc: "Upgrade to new NixOs configuration"
+    vars:
+      HOST:
+        sh: printf '%s\n' nixos wsl | fzf --prompt="Select host> "
+    cmds:
+      - echo 'Upgrade to new NixOs configuration ({{.HOST}})'
+      - nixos-rebuild switch --upgrade --flake .#{{.HOST}}
     silent: false
 
   channel-update:
@@ -48,31 +67,21 @@ tasks:
       - nix-collect-garbage -d --delete-older-than 3d
     silent: false
 
-  upgrade:
-    desc: "Upgrade to new NixOs configuration"
-    cmds:
-      - echo 'Upgrade to new NixOs configuration'
-      - nixos-rebuild switch --upgrade --flake .
-    silent: false
-
   format:
     desc: "Format NixOS configuration files"
     cmds:
-      - nixfmt configuration.nix
-      - nixfmt flake.nix
-      - nixfmt var.nix
+      - find . -name '*.nix' -exec nixfmt {} +
     silent: false
 
-  show:
-    desc: "Show system information"
+  symlink:
+    desc: "Symlink nixos-config to /etc/nixos"
     cmds:
-      - fastfetch
+      - echo 'Symlinking configuration.nix'
+      - ln -sfn ~/nixos-config/ /etc/nixos/
     silent: false
 
   channel-add:
     desc: "Adding channels"
     cmds:
       - nix-channel --add https://nixos.org/channels/nixos-25.05 nixos
-    # - >- nix-channel --add https://nixos.org/channels/nixos-unstable \
-    # nixos-unstable
     silent: false
