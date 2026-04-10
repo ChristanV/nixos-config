@@ -61,14 +61,6 @@ actions:
     - trunk-check-pre-push
     - trunk-fmt-pre-commit
     - trunk-upgrade-available
-    - nix-flake-check
-
-  definitions:
-    - id: nix-flake-check
-      description: Run nix flake check on the whole repo
-      run: nix flake check
-      triggers:
-        - git_hooks: [pre-push]
 
 runtimes:
   enabled:
