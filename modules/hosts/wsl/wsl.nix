@@ -11,6 +11,7 @@ in
     };
     modules = [
       { nix.registry.nixpkgs.flake = inputs.nixpkgs; }
+      inputs.nixos-wsl.nixosModules.wsl
       self.nixosModules.baseConfig
       self.nixosModules.basePackages
       self.nixosModules.wslPackages
