@@ -23,10 +23,13 @@ tasks:
     silent: false
 
   boot:
-    desc: "Boot to new NixOs configuration"
+    desc: "Building new NixOs configuration"
+    vars:
+      HOST:
+        sh: printf '%s\n' nixos wsl | fzf --prompt="Select host> "
     cmds:
-      - echo 'Boot to new NixOs configuration'
-      - nixos-rebuild boot --flake .
+      - echo 'Boot to new NixOs configuration ({{.HOST}})'
+      - nixos-rebuild boot --flake .#{{.HOST}}
     silent: false
 
   test:

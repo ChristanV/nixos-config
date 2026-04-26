@@ -20,6 +20,9 @@
         };
       };
 
+      # Tmp fix for python3.12
+      documentation.doc.enable = false;
+
       nix = {
         settings = {
           download-buffer-size = 524288000; # 500 MiB

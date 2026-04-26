@@ -69,7 +69,7 @@
         zip
         terraform
         terragrunt
-        python313
+        python312
         python312Packages.pip
         python312Packages.ansible-core
         poetry
