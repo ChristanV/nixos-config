@@ -29,7 +29,6 @@
         teams-for-linux
         libreoffice
         brave
-        unstable.zed-editor
         cheese
 
         # Terminals

@@ -20,6 +20,7 @@
 
         # Core Packages
         neovim
+        unstable.zed-editor
         vimPlugins.packer-nvim
         gnumake
         busybox

@@ -45,6 +45,21 @@
         allowUnsupportedSystem = false;
       };
 
+      fonts = {
+        packages = with pkgs; [
+          nerd-fonts.hack
+          nerd-fonts.symbols-only
+        ];
+        fontconfig = {
+          defaultFonts = {
+            monospace = [
+              "Hack Nerd Font"
+              "NerdFontsSymbolsOnly"
+            ];
+          };
+        };
+      };
+
       programs.nix-ld = {
         enable = true;
         package = pkgs.nix-ld;

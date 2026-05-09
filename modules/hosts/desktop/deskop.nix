@@ -53,21 +53,6 @@ in
       time.timeZone = "Africa/Johannesburg";
       i18n.defaultLocale = "en_GB.UTF-8";
 
-      fonts = {
-        packages = with pkgs; [
-          nerd-fonts.hack
-          nerd-fonts.symbols-only
-        ];
-        fontconfig = {
-          defaultFonts = {
-            monospace = [
-              "Hack Nerd Font"
-              "NerdFontsSymbolsOnly"
-            ];
-          };
-        };
-      };
-
       services = {
         xserver = {
           xkb = {
@@ -138,7 +123,7 @@ in
 
         hyprland = {
           enable = true;
-          withUWSM = false;
+          withUWSM = true;
           xwayland.enable = true;
         };
 
@@ -181,6 +166,8 @@ in
         sessionVariables = {
           WLR_NO_HARDWARE_CURSORS = "1";
           NIXOS_OZONE_WL = "1";
+          GBM_BACKEND = "nvidia-drm";
+          __GLX_VENDOR_LIBRARY_NAME = "nvidia";
         };
 
         variables = {
