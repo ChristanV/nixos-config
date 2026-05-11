@@ -73,6 +73,7 @@
         python312
         python312Packages.pip
         python312Packages.ansible-core
+        ruff
         poetry
         go
         nodejs_24
