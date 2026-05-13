@@ -20,8 +20,12 @@
         };
       };
 
-      # Tmp fix for python3.12
-      documentation.doc.enable = false;
+      documentation = {
+        # Tmp fix for python3.12
+        doc.enable = false;
+        man.enable = false;
+        nixos.enable = false;
+      };
 
       nix = {
         settings = {

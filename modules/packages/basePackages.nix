@@ -52,6 +52,7 @@
           pkgs.azure-cli-extensions.ssh
         ])
         awscli2
+        doctl
         docker_28
         docker-compose
         zsh
