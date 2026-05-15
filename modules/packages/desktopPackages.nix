@@ -33,7 +33,7 @@
 
         # Terminals
         wezterm
-        kitty
+        ghostty
 
         # hyprland
         waybar
