@@ -49,6 +49,8 @@
         hyprlock
         kdePackages.qt6ct
         gsettings-desktop-schemas
+        wl-clipboard
+        wl-clip-persist
 
         # Gaming
         wineWow64Packages.stable

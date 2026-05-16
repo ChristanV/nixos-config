@@ -92,6 +92,7 @@
         direnv
         devenv
         xclip
+        zellij
 
         # LSP's, Linters and checkers
         terraform-ls

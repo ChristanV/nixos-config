@@ -257,6 +257,8 @@
           alias nixr='sudo nixos-rebuild switch'
           alias nixb='nixos-rebuild build'
           alias sprite='~/.local/bin/sprite'
+          alias dev='zellij --layout dev-copilot'
+          alias devc='zellij --layout dev-claude'
 
           # Fix for D-Bus session for systemctl --user
           export XDG_RUNTIME_DIR="/run/user/$(id -u)"
