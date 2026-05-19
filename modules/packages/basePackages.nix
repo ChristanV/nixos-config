@@ -93,6 +93,7 @@
         devenv
         xclip
         zellij
+        lazydocker
 
         # LSP's, Linters and checkers
         terraform-ls
