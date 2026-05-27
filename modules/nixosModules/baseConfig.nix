@@ -311,6 +311,9 @@
           ZSH_HIGHLIGHT_STYLES[builtin]='fg=#769ff0'
           ZSH_HIGHLIGHT_STYLES[globbing]='fg=red'
           ZSH_HIGHLIGHT_STYLES[path]='fg=white'
+
+          # Disable Alt+Number self-inserting characters
+          bindkey -r "^[0" "^[1" "^[2" "^[3" "^[4" "^[5" "^[6" "^[7" "^[8" "^[9"
           EOF
         '';
       };
