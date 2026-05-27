@@ -53,7 +53,7 @@
         ])
         awscli2
         doctl
-        docker_28
+        docker_29
         docker-compose
         zsh
         zsh-fzf-tab
