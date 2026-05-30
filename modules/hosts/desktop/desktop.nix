@@ -63,12 +63,19 @@ in
           videoDrivers = [ "nvidia" ];
         };
 
-        gnome.gnome-keyring.enable = true;
+        dunst = {
+          enable = true;
+        };
+
         printing.enable = true;
 
         displayManager = {
-          sddm.enable = true;
-          autoLogin.enable = false;
+          sddm = {
+            enable = true;
+            package = pkgs.kdePackages.sddm;
+            theme = "elarun";
+          };
+          autoLogin.enable = true;
           autoLogin.user = "christan";
         };
 
@@ -101,10 +108,6 @@ in
           '';
         };
         rtkit.enable = true;
-        pam.services = {
-          sddm.enableGnomeKeyring = true;
-          login.enableGnomeKeyring = true;
-        };
       };
 
       systemd = {
@@ -126,6 +129,8 @@ in
           withUWSM = true;
           xwayland.enable = true;
         };
+
+        hyprlock.enable = true;
 
         steam = {
           enable = true;

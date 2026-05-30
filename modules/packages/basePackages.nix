@@ -11,10 +11,7 @@
     {
       environment.systemPackages = with pkgs; [
         # Security
-        clamav
         unstable._1password-cli
-        tailscale
-        gnome-keyring
         libsecret
         libxcrypt
 
@@ -55,7 +52,6 @@
         doctl
         docker_29
         docker-compose
-        zsh
         zsh-fzf-tab
         steampipe
         fzf
@@ -94,6 +90,7 @@
         xclip
         zellij
         lazydocker
+        yazi
 
         # LSP's, Linters and checkers
         terraform-ls

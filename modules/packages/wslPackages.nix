@@ -7,7 +7,6 @@ _: {
         redpanda-client
         stdenv.cc.cc.lib # libstdc++ for python numpy
         zlib
-        xclip
         cacert
         btop
       ];

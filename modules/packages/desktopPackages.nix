@@ -21,8 +21,6 @@
         steam-run
         bruno
         dbeaver-bin
-        vscode
-        nemo
         nwg-look
         pavucontrol
         vlc
@@ -40,7 +38,6 @@
         (pkgs.waybar.overrideAttrs (oldAttrs: {
           mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
         }))
-        dunst
         libnotify
         awww
         rofi
