@@ -18,6 +18,8 @@
         gsettings-desktop-schemas
         wl-clipboard
         wl-clip-persist
+        wf-recorder
+        slurp
       ];
     };
 }

@@ -25,9 +25,11 @@
         nwg-look
         pavucontrol
         vlc
+        mpv
         teams-for-linux
         libreoffice
         cheese
+        nautilus
 
         # Terminals
         ghostty
