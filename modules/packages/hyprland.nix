@@ -10,6 +10,7 @@
         }))
         libnotify
         awww
+        mpvpaper
         rofi
         networkmanagerapplet
         hyprpolkitagent
