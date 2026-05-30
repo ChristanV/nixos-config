@@ -259,6 +259,9 @@
           alias sprite='~/.local/bin/sprite'
           alias dev='zellij --layout dev-copilot'
           alias devc='zellij --layout dev-claude'
+          alias devg='zellij --layout dev-gemini'
+          alias explorer='yazi'
+          alias exp='yazi'
 
           # Fix for D-Bus session for systemctl --user
           export XDG_RUNTIME_DIR="/run/user/$(id -u)"
