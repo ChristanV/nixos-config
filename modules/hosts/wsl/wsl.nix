@@ -15,7 +15,6 @@ in
       self.nixosModules.baseConfig
       self.nixosModules.basePackages
       self.nixosModules.wslPackages
-      self.nixosModules.claude
       self.nixosModules.system
       self.nixosModules.wsl
     ];

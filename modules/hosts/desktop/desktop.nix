@@ -13,7 +13,6 @@ in
       self.nixosModules.baseConfig
       self.nixosModules.basePackages
       self.nixosModules.desktopPackages
-      self.nixosModules.claude
       self.nixosModules.system
       self.nixosModules.desktop
       ./_hardware-configuration.nix

@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.nixosModules.claude =
+  flake.nixosModules.editors =
     { pkgs, ... }:
     let
       unstable = import inputs.nixpkgs-unstable {
@@ -9,8 +9,11 @@
       };
     in
     {
-      environment.systemPackages = [
-        unstable.claude-code
+      environment.systemPackages = with pkgs; [
+        neovim
+        vimPlugins.packer-nvim
+        unstable.zed-editor
+        vscode
       ];
     };
 }
