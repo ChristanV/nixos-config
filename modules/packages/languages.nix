@@ -7,7 +7,6 @@
         # Python
         python312
         python312Packages.pip
-        python312Packages.ansible-core
         virtualenv
         poetry
 

@@ -55,6 +55,7 @@
         gemini-cli
 
         # Kubernetes
+        kubernetes
         kubectl
         kubectx
         kubelogin
@@ -63,7 +64,7 @@
         stern
         k9s
         kind
-        k3s
+        sonobuoy
 
         # Cloud
         (azure-cli.withExtensions [
@@ -71,7 +72,6 @@
           pkgs.azure-cli-extensions.ssh
         ])
         awscli2
-        doctl
         flyctl
         eksctl
         ssm-session-manager-plugin
