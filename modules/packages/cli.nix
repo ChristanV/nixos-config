@@ -82,6 +82,7 @@
         docker-compose
         lazydocker
         nvidia-container-toolkit
+        regctl
 
         # Infra
         terraform
