@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780709764,
-        "narHash": "sha256-TmYUn7Gr92j2qsrBiNdxxyboeUgsbCQ9xEn+aBsOcxQ=",
+        "lastModified": 1780791760,
+        "narHash": "sha256-Cg2mx6ILPC/cAoomJrwx1TvMaFvvNi9DNbd3Hy+7L18=",
         "owner": "sadjow",
         "repo": "claude-code-nix",
-        "rev": "621404fd3264455b1b451e90e90566c4b67c2fb4",
+        "rev": "2370568ed1eac96474fa3bb2e73081cc971f9c03",
         "type": "github"
       },
       "original": {
@@ -173,16 +173,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1780448639,
-        "narHash": "sha256-1s29/xP6iXwaEkTBxwbIQDnQzrLShlBcbnbTu0qJA0c=",
+        "lastModified": 1780705040,
+        "narHash": "sha256-pVadZqLm8RJcwLuDzJm7d2KO6e+RHPpIa/2qdqtn+B4=",
         "owner": "nix-community",
         "repo": "nixos-wsl",
-        "rev": "364422fc0bad4fd3be804c00cadcbd6fa3f305d8",
+        "rev": "add6b01c7ca72240046b5d541a74845423f1ee35",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "release-25.11",
+        "ref": "release-26.05",
         "repo": "nixos-wsl",
         "type": "github"
       }
