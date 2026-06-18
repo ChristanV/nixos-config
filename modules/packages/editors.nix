@@ -13,7 +13,6 @@
         neovim
         vimPlugins.packer-nvim
         unstable.zed-editor
-        vscode
       ];
     };
 }

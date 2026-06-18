@@ -5,8 +5,8 @@
     {
       environment.systemPackages = with pkgs; [
         # Python
-        python312
-        python312Packages.pip
+        python313
+        python313Packages.pip
         virtualenv
         poetry
 
