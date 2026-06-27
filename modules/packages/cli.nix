@@ -26,8 +26,6 @@
         yq-go
         openssl
         go-task
-        git
-        lazygit
         fd
         ripgrep
         zoxide
@@ -46,6 +44,11 @@
         graphviz
         direnv
         devenv
+
+        # Git
+        git
+        lazygit
+        pinact
         gh
         unstable.trunk-io
 
