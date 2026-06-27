@@ -42,7 +42,6 @@
         btop-cuda
         plantuml
         graphviz
-        direnv
         devenv
 
         # Git
