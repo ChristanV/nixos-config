@@ -95,6 +95,11 @@
 
         # Misc
         chromedriver
+
+        # Data
+        snowflake-cli
+        redpanda-client
+        rsync
       ];
     };
 }
