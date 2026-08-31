@@ -100,6 +100,7 @@
         snowflake-cli
         redpanda-client
         rsync
+        snowsql
       ];
     };
 }
