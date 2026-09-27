@@ -5,9 +5,6 @@
     {
       environment.systemPackages = with pkgs; [
         waybar
-        (pkgs.waybar.overrideAttrs (oldAttrs: {
-          mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-        }))
         libnotify
         awww
         mpvpaper

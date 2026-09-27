@@ -1,13 +1,6 @@
-{ inputs, ... }:
-{
+_: {
   flake.nixosModules.cli =
-    { pkgs, ... }:
-    let
-      unstable = import inputs.nixpkgs-unstable {
-        inherit (pkgs.stdenv.hostPlatform) system;
-        inherit (pkgs) config;
-      };
-    in
+    { pkgs, unstable, ... }:
     {
       environment.systemPackages = with pkgs; [
         # Security
@@ -69,10 +62,10 @@
         sonobuoy
 
         # Cloud
-        (azure-cli.withExtensions [
-          pkgs.azure-cli-extensions.bastion
-          pkgs.azure-cli-extensions.ssh
-        ])
+        #(azure-cli.withExtensions [
+        #  pkgs.azure-cli-extensions.bastion
+        #  pkgs.azure-cli-extensions.ssh
+        #])
         awscli2
         flyctl
         eksctl
@@ -98,7 +91,7 @@
 
         # Data
         snowflake-cli
-        redpanda-client
+        # redpanda-client
         rsync
         snowsql
       ];

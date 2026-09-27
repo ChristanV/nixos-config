@@ -14,7 +14,7 @@
           enable = true;
           flake = inputs.self.outPath;
           flags = [ ];
-          dates = "12:00";
+          dates = "00:00";
           randomizedDelaySec = "45min";
           allowReboot = false;
         };

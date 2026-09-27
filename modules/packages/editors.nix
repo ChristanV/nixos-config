@@ -1,13 +1,6 @@
-{ inputs, ... }:
-{
+_: {
   flake.nixosModules.editors =
-    { pkgs, ... }:
-    let
-      unstable = import inputs.nixpkgs-unstable {
-        inherit (pkgs.stdenv.hostPlatform) system;
-        inherit (pkgs) config;
-      };
-    in
+    { pkgs, unstable, ... }:
     {
       environment.systemPackages = with pkgs; [
         neovim

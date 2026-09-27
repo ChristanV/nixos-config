@@ -4,7 +4,7 @@ _: {
     {
       environment.systemPackages = with pkgs; [
         monkeysphere
-        redpanda-client
+        # redpanda-client
         stdenv.cc.cc.lib # libstdc++ for python numpy
         zlib
         cacert
