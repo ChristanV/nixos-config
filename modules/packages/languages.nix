@@ -9,6 +9,7 @@
         python313Packages.pip
         virtualenv
         poetry
+        uv
 
         # Node
         nodejs_24
