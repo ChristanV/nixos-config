@@ -78,22 +78,41 @@
           enable = true;
           theme = "agnoster";
           plugins = [
+            # Version control
             "git"
-            "z"
-            "history"
-            "sudo"
+
+            # Cloud & Platforms
             "docker"
             "docker-compose"
             "aws"
             "azure"
+            "helm"
             "argocd"
             "kubectl"
             "kubectx"
-            "pip"
-            "ssh"
+            "ansible"
             "terraform"
-            "fzf"
+
+            # Development
+            "pip"
             "poetry"
+            "python"
+            "uv"
+            "golang"
+            "node"
+            "dbt"
+            "postgres"
+            "virtualenv"
+
+            # Navigation & Control
+            "z"
+            "history"
+            "sudo"
+            "ssh"
+            "fzf"
+
+            # Productivity
+            "1password"
           ];
         };
 

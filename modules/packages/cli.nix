@@ -88,6 +88,7 @@ _: {
 
         # Misc
         chromedriver
+        gcc
 
         # Data
         snowflake-cli
