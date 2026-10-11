@@ -257,8 +257,19 @@
           alias nixr='sudo nixos-rebuild switch'
           alias nixb='nixos-rebuild build'
           alias sprite='~/.local/bin/sprite'
-          alias dev='zellij --layout dev-copilot'
-          alias devc='zellij --layout dev-claude'
+          # Attach to the session named after the current folder, or start a fresh one with the given layout
+          _zellij_dev() {
+            local name="''${PWD:t}"
+            name="''${name//[^A-Za-z0-9_-]/-}"
+            if zellij list-sessions -n 2>/dev/null | grep "^$name " | grep -vq EXITED; then
+              zellij attach "$name"
+            else
+              zellij delete-session "$name" >/dev/null 2>&1
+              zellij --session "$name" --new-session-with-layout "$1"
+            fi
+          }
+          dev() { _zellij_dev dev-copilot }
+          devc() { _zellij_dev dev-claude }
           alias devg='zellij --layout dev-gemini'
           alias explorer='yazi'
           alias exp='yazi'
