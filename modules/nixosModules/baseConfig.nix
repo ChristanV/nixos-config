@@ -289,7 +289,6 @@
           }
           dev() { _zellij_dev dev-copilot }
           devc() { _zellij_dev dev-claude }
-          alias devg='zellij --layout dev-gemini'
           alias explorer='yazi'
           alias exp='yazi'
 

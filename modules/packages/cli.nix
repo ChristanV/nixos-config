@@ -47,7 +47,6 @@ _: {
         # AI
         github-copilot-cli
         unstable.claude-code
-        gemini-cli
 
         # Kubernetes
         kubernetes
