@@ -9,6 +9,7 @@ _: {
         zlib
         cacert
         btop
+        chromium
       ];
     };
 }
