@@ -22,6 +22,12 @@
         deadnix
         nixfmt
 
+        # GitHub Actions
+        actionlint
+
+        # Shell
+        shellcheck
+
         # General
         pre-commit
         gitleaks

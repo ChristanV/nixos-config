@@ -4,7 +4,7 @@ _: {
     {
       environment.systemPackages = with pkgs; [
         neovim
-        vimPlugins.packer-nvim
+        tree-sitter
         unstable.zed-editor
       ];
     };
