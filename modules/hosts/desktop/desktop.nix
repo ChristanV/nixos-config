@@ -146,7 +146,8 @@ in
         dconf.profiles.user.databases = [
           {
             settings."org/gnome/desktop/interface" = {
-              gtk-theme = "Adwaita-dark";
+              gtk-theme = "Nordic-bluish-accent";
+              color-scheme = "prefer-dark";
               icon-theme = "Flat-Remix-Red-Dark";
               font-name = "Noto Sans Medium 11";
               document-font-name = "Noto Sans Medium 11";

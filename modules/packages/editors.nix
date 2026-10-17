@@ -5,7 +5,6 @@ _: {
       environment.systemPackages = with pkgs; [
         neovim
         tree-sitter
-        unstable.zed-editor
       ];
     };
 }

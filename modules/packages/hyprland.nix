@@ -13,6 +13,7 @@
         hyprpolkitagent
         hyprlock
         kdePackages.qt6ct
+        nordic
         gsettings-desktop-schemas
         wl-clipboard
         wl-clip-persist

@@ -41,7 +41,6 @@ in
 
       environment.variables = {
         LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
-        ZED_ALLOW_EMULATED_GPU = 1;
       };
 
       wsl = {
