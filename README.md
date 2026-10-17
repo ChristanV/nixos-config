@@ -78,3 +78,6 @@ Known unstable items I am still trying to resolve.
 See samples folder for configuration files for nix shell for dev environments
 
 Nerdfonts is installed externally and added to windows terminal
+
+All additional application configurations are symlinked from
+[dotfiles](https://github.com/ChristanV/dotfiles)
