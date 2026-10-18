@@ -17,6 +17,9 @@
         # Ansible
         ansible-lint
 
+        # Lua
+        stylua
+
         # Nix
         statix
         deadnix
@@ -27,6 +30,7 @@
 
         # Shell
         shellcheck
+        shfmt
 
         # General
         pre-commit
